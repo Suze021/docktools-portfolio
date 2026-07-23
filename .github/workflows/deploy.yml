@@ -21,7 +21,7 @@ jobs:
       KUBECONFIG: /etc/rancher/k3s/k3s.yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Validate manifests
         run: kubectl kustomize . >/dev/null
