@@ -128,7 +128,7 @@ button { color: inherit; font: inherit; }
 
 .site-header.is-hidden { transform: translateY(-101%); }
 .menu-open .site-header { color: var(--white); border-color: transparent; background: transparent; backdrop-filter: none; }
-.menu-open .wordmark-symbol { color: var(--ink); background: var(--white); }
+.menu-open .wordmark-symbol { outline-color: rgba(248, 245, 237, .28); }
 
 .wordmark {
   display: inline-flex;
@@ -143,13 +143,15 @@ button { color: inherit; font: inherit; }
 .wordmark-symbol {
   width: 34px;
   height: 34px;
-  display: grid;
-  place-items: center;
-  color: var(--white);
-  background: var(--ink);
-  font-size: 11px;
-  letter-spacing: -.06em;
+  display: block;
+  flex: 0 0 34px;
+  overflow: hidden;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color .3s;
 }
+
+.wordmark-symbol img { display: block; width: 100%; height: 100%; }
 
 .site-nav {
   display: flex;

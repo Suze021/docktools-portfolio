@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="396" viewBox="0 0 1584 396" role="img" aria-labelledby="title desc">
+  <title id="title">Banner do LinkedIn de Guilherme Oliveira</title>
+  <desc id="desc">Identidade editorial com uma lente gravitacional abstrata para um desenvolvedor full-stack.</desc>
+  <rect width="1584" height="396" fill="#eeeae0"/>
+  <path d="M0 0h1584v14H0z" fill="#151412"/>
+  <path d="M1230 14h354v382h-354z" fill="#151412"/>
+  <path d="M1162 14h68v382h-68z" fill="#ed4b2e"/>
+  <path d="M1098 14h64v382h-64z" fill="#1746d1"/>
+  <g fill="none" stroke="#c5c0b4" stroke-width="1">
+    <path d="M356 82h686"/>
+    <path d="M356 324h686"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#151412">
+    <text x="356" y="69" font-size="18" font-weight="700" letter-spacing="3.2">GUILHERME OLIVEIRA</text>
+    <text x="356" y="174" font-family="Georgia, 'Times New Roman', serif" font-size="66" letter-spacing="-2.7">Desenvolvedor</text>
+    <text x="356" y="240" font-family="Georgia, 'Times New Roman', serif" font-size="66" font-style="italic" letter-spacing="-2.7">full-stack.</text>
+    <text x="358" y="291" font-size="19" font-weight="700" letter-spacing="0.6">NODE.JS  ·  TYPESCRIPT  ·  REACT  ·  NEXT.JS</text>
+    <text x="358" y="354" font-size="17" font-weight="700" letter-spacing="1.1">DOCKTOOLS.DEV</text>
+  </g>
+  <g transform="translate(1302 74)">
+    <rect width="152" height="152" fill="#f8f5ed"/>
+    <g transform="translate(24 24) scale(1.625)">
+      <rect width="64" height="64" rx="1" fill="#151412"/>
+      <path d="M13.8 35.8C14.8 19.7 21.7 9.4 32.8 8.6 43.9 7.8 52.8 18.5 51.2 32.5l-7.2 1.8c1.1-10.6-4-18.1-11.1-17.6-7.6.5-11.2 8.6-11.8 17.6Z" fill="#f8f5ed"/>
+      <path d="M17.8 40.4c2.3 10.3 7.6 15.4 15.2 15.1 8.3-.3 13.5-6.8 14.8-17.3l-6.8 2c-1.2 6-3.9 8.7-8.1 8.9-3.8.1-6.3-2.7-7.8-8.2Z" fill="#f8f5ed"/>
+      <path d="M0 43.5c13.8-3 23-8.3 34-11.6 11.5-3.4 20.7-5 30-7.9v5.4c-9.2 2.1-17.8 4.2-28.7 7.2C23.6 40 14 45.1 0 48.2Z" fill="#f8f5ed"/>
+      <path d="M0 42.3c13.5-3.6 22.7-8.5 33.7-11.8 11.4-3.4 20.7-5.4 30.3-8.3V25c-9.5 2.7-18.5 4.5-29.6 7.9C23.3 36.3 13.8 41.4 0 44.8Z" fill="#ed4b2e"/>
+      <path d="M8 41.4c11-3.2 18.6-7.2 27-9.7 8.2-2.5 15.4-4.2 21-6" fill="none" stroke="#151412" stroke-width="1.15" stroke-linecap="round" opacity=".7"/>
+    </g>
+    <text x="0" y="208" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2.2" fill="#f8f5ed">SOFTWARE</text>
+    <text x="0" y="235" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" letter-spacing="2.2" fill="#f8f5ed">&amp; SYSTEMS</text>
+  </g>
+</svg>

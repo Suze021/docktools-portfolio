@@ -17,6 +17,7 @@ configMapGenerator:
   - name: portfolio-assets
     files:
       - curriculo-guilherme-rocha.pdf=assets/curriculo-guilherme-rocha.pdf
+      - docktools-mark.svg=assets/docktools-mark.svg
 generatorOptions:
   labels:
     app.kubernetes.io/name: docktools-portfolio
