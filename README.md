@@ -7,7 +7,7 @@ Landing page estática do portfólio DockTools, publicada em `https://docktools.
 - HTML, CSS e JavaScript sem dependências de runtime.
 - Nginx não-root no K3s.
 - Caddy existente mantém TLS e encaminha o domínio ao NodePort `30080`.
-- Se o K3s ficar indisponível, o Caddy serve automaticamente a landing anterior como fallback.
+- Se o K3s ficar indisponível, o Caddy encaminha automaticamente para um Nginx mínimo que serve a landing anterior.
 - GitHub Actions em runner próprio da VPS publica cada push para `main`.
 - Readiness, liveness, limites de recursos, health check externo e rollback em falha.
 
@@ -32,4 +32,4 @@ kubectl -n docktools get deploy,pod,service
 curl -fsS https://docktools.dev/healthz
 ```
 
-O bloco de produção e fallback do proxy está documentado em `ops/Caddyfile.docktools`.
+O bloco do proxy está em `ops/Caddyfile.docktools`; o servidor de contingência está descrito em `ops/fallback-compose.yaml`.

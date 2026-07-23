@@ -1,0 +1,20 @@
+services:
+  fallback:
+    image: nginx:stable-alpine
+    container_name: docktools-fallback
+    restart: unless-stopped
+    networks:
+      - docktools-proxy
+    volumes:
+      - /root/docktools-proxy/site:/usr/share/nginx/html:ro
+      - ./fallback-nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+networks:
+  docktools-proxy:
+    external: true
+    name: docktools-proxy_default
