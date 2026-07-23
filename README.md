@@ -1,6 +1,6 @@
-# DockTools Portfolio
+# Portfólio — Guilherme de Oliveira Rocha
 
-Landing page estática do portfólio DockTools, publicada em `https://docktools.dev`.
+Portfólio pessoal de Guilherme de Oliveira Rocha, publicado em `https://docktools.dev`.
 
 ## Arquitetura
 

@@ -14,6 +14,9 @@ configMapGenerator:
   - name: portfolio-nginx
     files:
       - nginx.conf
+  - name: portfolio-assets
+    files:
+      - curriculo-guilherme-rocha.pdf=assets/curriculo-guilherme-rocha.pdf
 generatorOptions:
   labels:
     app.kubernetes.io/name: docktools-portfolio
