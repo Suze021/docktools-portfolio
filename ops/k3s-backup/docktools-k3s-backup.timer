@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup diario do K3s Docktools
+
+[Timer]
+OnCalendar=*-*-* 05:15:00 UTC
+RandomizedDelaySec=10m
+Persistent=true
+Unit=docktools-k3s-backup.service
+
+[Install]
+WantedBy=timers.target

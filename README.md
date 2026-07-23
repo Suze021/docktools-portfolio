@@ -33,3 +33,9 @@ curl -fsS https://docktools.dev/healthz
 ```
 
 O bloco do proxy está em `ops/Caddyfile.docktools`; o servidor de contingência está descrito em `ops/fallback-compose.yaml`.
+
+## Infraestrutura adjacente
+
+- `ops/k3s/csr-staging`: manifests do app Casa Sobre Rodas em staging; o banco continua no Docker.
+- `ops/k3s-backup`: backup consistente diário do datastore e dos volumes locais do K3s.
+- `ops/alloy`: substituição do Promtail EOL pelo Grafana Alloy, preservando labels e posições do Loki.

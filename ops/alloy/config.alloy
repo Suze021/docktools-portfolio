@@ -1,0 +1,36 @@
+loki.source.file "system" {
+	targets = [{
+		__address__ = "localhost",
+		__path__    = "/var/log/*.log",
+		host        = "docktools-vps",
+		job         = "varlogs",
+	}]
+	forward_to = [loki.write.default.receiver]
+
+	file_match {
+		enabled = true
+	}
+	legacy_positions_file = "/tmp/positions.yaml"
+}
+
+loki.source.file "docker" {
+	targets = [{
+		__address__ = "localhost",
+		__path__    = "/var/lib/docker/containers/*/*.log",
+		host        = "docktools-vps",
+		job         = "docker",
+	}]
+	forward_to = [loki.write.default.receiver]
+
+	file_match {
+		enabled = true
+	}
+	legacy_positions_file = "/tmp/positions.yaml"
+}
+
+loki.write "default" {
+	endpoint {
+		url = "http://loki:3100/loki/api/v1/push"
+	}
+	external_labels = {}
+}

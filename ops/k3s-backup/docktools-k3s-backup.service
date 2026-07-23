@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup consistente do K3s Docktools
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/docktools-k3s-backup
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
