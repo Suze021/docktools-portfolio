@@ -17,6 +17,8 @@ jobs:
     name: Deploy to private VPS
     runs-on: [self-hosted, linux, x64, docktools-portfolio]
     timeout-minutes: 10
+    env:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4
