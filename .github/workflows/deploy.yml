@@ -1,0 +1,47 @@
+name: Deploy production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: docktools-portfolio-production
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to private VPS
+    runs-on: [self-hosted, linux, x64, docktools-portfolio]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate manifests
+        run: kubectl kustomize . >/dev/null
+
+      - name: Apply to K3s
+        shell: bash
+        run: |
+          set -euo pipefail
+          kubectl apply -k .
+          if ! kubectl -n docktools rollout status deployment/docktools-portfolio --timeout=120s; then
+            kubectl -n docktools rollout undo deployment/docktools-portfolio || true
+            exit 1
+          fi
+
+      - name: Production health check
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in {1..12}; do
+            if curl --fail --silent --show-error --max-time 8 https://docktools.dev/healthz; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1

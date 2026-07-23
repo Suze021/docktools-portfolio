@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: docktools
+resources:
+  - k8s/namespace.yaml
+  - k8s/deployment.yaml
+  - k8s/service.yaml
+configMapGenerator:
+  - name: portfolio-site
+    files:
+      - index.html
+      - styles.css
+      - app.js
+  - name: portfolio-nginx
+    files:
+      - nginx.conf
+generatorOptions:
+  labels:
+    app.kubernetes.io/name: docktools-portfolio
+    app.kubernetes.io/managed-by: kustomize

@@ -1,0 +1,17 @@
+# Produção no K3s. Se o upstream não responder, o Caddy entra na rota de erro
+# e serve a landing anterior montada em /srv/docktools.
+docktools.dev, www.docktools.dev {
+    reverse_proxy 172.17.0.1:30080 {
+        lb_try_duration 2s
+        lb_try_interval 250ms
+    }
+
+    handle_errors {
+        @health path /healthz
+        respond @health "portfolio unavailable" 503
+
+        root * /srv/docktools
+        rewrite * /index.html
+        file_server
+    }
+}
