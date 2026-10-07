@@ -14,27 +14,34 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy to private VPS
+    name: Deploy to home server
     runs-on: [self-hosted, linux, x64, docktools-portfolio]
     timeout-minutes: 10
     env:
-      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+      STACK_DIR: /home/suze/stacks/portfolio
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Validate manifests
-        run: kubectl kustomize . >/dev/null
-
-      - name: Apply to K3s
+      - name: Publish files
         shell: bash
         run: |
           set -euo pipefail
-          kubectl apply -k .
-          if ! kubectl -n docktools rollout status deployment/docktools-portfolio --timeout=120s; then
-            kubectl -n docktools rollout undo deployment/docktools-portfolio || true
-            exit 1
-          fi
+          site="$STACK_DIR/site"
+          mkdir -p "$site/assets"
+          install -m 0644 ops/portfolio-compose.yaml "$STACK_DIR/compose.yaml"
+          install -m 0644 nginx.conf "$STACK_DIR/nginx.conf"
+          install -m 0644 index.html styles.css app.js "$site/"
+          # Só o que ia para o ar no K3s; os banners do LinkedIn ficam fora.
+          install -m 0644 assets/curriculo-guilherme-rocha.pdf assets/docktools-mark.svg "$site/assets/"
+
+      - name: Apply
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo -n docker compose -f "$STACK_DIR/compose.yaml" up -d --wait
+          sudo -n docker exec docktools-portfolio nginx -t
+          sudo -n docker exec docktools-portfolio nginx -s reload
 
       - name: Production health check
         shell: bash
