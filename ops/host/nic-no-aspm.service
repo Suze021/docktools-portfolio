@@ -1,0 +1,14 @@
+# A RTL8106e (0000:02:00.0) vinha com ASPM L0s ligado pelo BIOS; essa
+# combinacao e suspeita de travar a placa em silencio (queda de 08/10/2026).
+[Unit]
+Description=Desliga ASPM na placa de rede Realtek
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c 'echo 0 > /sys/bus/pci/devices/0000:02:00.0/link/l0s_aspm; echo 0 > /sys/bus/pci/devices/0000:02:00.0/link/l1_aspm'
+
+[Install]
+WantedBy=multi-user.target

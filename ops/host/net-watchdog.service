@@ -1,0 +1,7 @@
+[Unit]
+Description=Vigia da placa de rede (religa interface/driver se o gateway sumir)
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/net-watchdog.sh
