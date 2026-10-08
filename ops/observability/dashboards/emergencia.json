@@ -662,6 +662,454 @@
   },
   {
    "id": 10,
+   "type": "stat",
+   "title": "Ligado há",
+   "description": "Laranja na primeira hora depois de um boot: se você não reiniciou, alguém (ou o vigia) reiniciou.",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 0,
+    "y": 16,
+    "w": 6,
+    "h": 4
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "time() - node_boot_time_seconds",
+     "legendFormat": "",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "textMode": "value",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "justifyMode": "center"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "dtdurations",
+     "mappings": [],
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "orange",
+        "value": null
+       },
+       {
+        "color": "green",
+        "value": 3600
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 11,
+   "type": "stat",
+   "title": "Quedas do link (24h)",
+   "description": "Cada queda do cabo conta uma (desce e sobe). Mau contato no RJ45 aparece aqui; boot e religar a interface também contam.",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 6,
+    "y": 16,
+    "w": 6,
+    "h": 4
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "round(increase(node_network_carrier_changes_total{device=\"enp2s0\"}[24h]) / 2)",
+     "legendFormat": "",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "textMode": "value",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "justifyMode": "center"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "none",
+     "mappings": [],
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       },
+       {
+        "color": "orange",
+        "value": 1
+       },
+       {
+        "color": "red",
+        "value": 5
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 12,
+   "type": "stat",
+   "title": "Velocidade da placa",
+   "description": "A porta do roteador é gigabit; 100 Mb/s costuma ser par de fios ruim no cabo ou no conector.",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 12,
+    "y": 16,
+    "w": 6,
+    "h": 4
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "max(node_network_speed_bytes{device=\"enp2s0\"}) * 8",
+     "legendFormat": "",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "textMode": "value",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "justifyMode": "center"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bps",
+     "mappings": [],
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "red",
+        "value": null
+       },
+       {
+        "color": "orange",
+        "value": 100000000.0
+       },
+       {
+        "color": "green",
+        "value": 1000000000.0
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 13,
+   "type": "stat",
+   "title": "Erros e descartes na placa (24h)",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 18,
+    "y": 16,
+    "w": 6,
+    "h": 4
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "round(sum(increase(node_network_receive_errs_total{device=\"enp2s0\"}[24h]) + increase(node_network_transmit_errs_total{device=\"enp2s0\"}[24h]) + increase(node_network_receive_drop_total{device=\"enp2s0\"}[24h]) + increase(node_network_transmit_drop_total{device=\"enp2s0\"}[24h])))",
+     "legendFormat": "",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "colorMode": "background",
+    "graphMode": "none",
+    "textMode": "value",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "justifyMode": "center"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "none",
+     "mappings": [],
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       },
+       {
+        "color": "orange",
+        "value": 1
+       },
+       {
+        "color": "red",
+        "value": 100
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 14,
+   "type": "timeseries",
+   "title": "Tráfego da rede (enp2s0)",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 0,
+    "y": 20,
+    "w": 8,
+    "h": 8
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "rate(node_network_receive_bytes_total{device=\"enp2s0\"}[2m]) * 8",
+     "legendFormat": "entrada",
+     "refId": "A",
+     "instant": false,
+     "range": true
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "rate(node_network_transmit_bytes_total{device=\"enp2s0\"}[2m]) * 8",
+     "legendFormat": "saída",
+     "refId": "B",
+     "instant": false,
+     "range": true
+    }
+   ],
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom"
+    },
+    "tooltip": {
+     "mode": "multi"
+    }
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bps",
+     "custom": {
+      "lineWidth": 2,
+      "fillOpacity": 10,
+      "thresholdsStyle": {
+       "mode": "off"
+      }
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 15,
+   "type": "bargauge",
+   "title": "Containers: memória agora",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 8,
+    "y": 20,
+    "w": 8,
+    "h": 8
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "sort_desc(topk(8, max by (name) (container_memory_working_set_bytes{name!=\"\"})))",
+     "legendFormat": "{{name}}",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "orientation": "horizontal",
+    "displayMode": "basic",
+    "showUnfilled": true,
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    }
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "min": 0,
+     "color": {
+      "mode": "continuous-GrYlRd"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 16,
+   "type": "bargauge",
+   "title": "Containers: CPU agora",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "gridPos": {
+    "x": 16,
+    "y": 20,
+    "w": 8,
+    "h": 8
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "expr": "sort_desc(topk(8, 100 * max by (name) (rate(container_cpu_usage_seconds_total{name!=\"\"}[2m]))))",
+     "legendFormat": "{{name}}",
+     "refId": "A",
+     "instant": true,
+     "range": false
+    }
+   ],
+   "options": {
+    "orientation": "horizontal",
+    "displayMode": "basic",
+    "showUnfilled": true,
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    }
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percent",
+     "min": 0,
+     "color": {
+      "mode": "continuous-GrYlRd"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       }
+      ]
+     }
+    },
+    "overrides": []
+   }
+  },
+  {
+   "id": 17,
    "type": "logs",
    "title": "Erros recentes nos containers",
    "datasource": {
@@ -670,7 +1118,7 @@
    },
    "gridPos": {
     "x": 0,
-    "y": 16,
+    "y": 28,
     "w": 24,
     "h": 10
    },
@@ -697,7 +1145,7 @@
    }
   },
   {
-   "id": 11,
+   "id": 18,
    "type": "logs",
    "title": "Sistema: túnel, runner, ssh, docker, kernel, vigia de rede",
    "datasource": {
@@ -706,7 +1154,7 @@
    },
    "gridPos": {
     "x": 0,
-    "y": 26,
+    "y": 38,
     "w": 24,
     "h": 9
    },
@@ -732,5 +1180,33 @@
     "prettifyLogMessage": false
    }
   }
- ]
+ ],
+ "annotations": {
+  "list": [
+   {
+    "name": "Reboot",
+    "datasource": {
+     "type": "loki",
+     "uid": "P8E80F9AEF21F6940"
+    },
+    "enable": true,
+    "iconColor": "red",
+    "expr": "{job=\"journal\", transport=\"kernel\"} |= \"Linux version\"",
+    "titleFormat": "Reboot",
+    "textFormat": "servidor reiniciou"
+   },
+   {
+    "name": "Vigia de rede",
+    "datasource": {
+     "type": "loki",
+     "uid": "P8E80F9AEF21F6940"
+    },
+    "enable": true,
+    "iconColor": "orange",
+    "expr": "{job=\"journal\", unit=\"net-watchdog.service\"} |~ \"etapa|voltou\"",
+    "titleFormat": "Vigia de rede",
+    "textFormat": "{{__line__}}"
+   }
+  ]
+ }
 }

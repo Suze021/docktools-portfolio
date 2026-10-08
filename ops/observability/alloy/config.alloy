@@ -108,6 +108,7 @@ prometheus.exporter.unix "host" {
 	set_collectors = [
 		"cpu", "loadavg", "meminfo", "filesystem", "diskstats", "netdev",
 		"hwmon", "thermal_zone", "powersupplyclass", "uname", "time", "pressure",
+		"netclass", "stat",
 	]
 
 	filesystem {
@@ -116,6 +117,10 @@ prometheus.exporter.unix "host" {
 	}
 	netdev {
 		device_include = "^enp2s0$"
+	}
+	// Quedas do link (carrier_changes) e velocidade negociada da placa.
+	netclass {
+		ignored_devices = "^(?:veth.*|br-.*|docker0|lo|wl.*)$"
 	}
 }
 
