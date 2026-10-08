@@ -1,0 +1,118 @@
+# Stack docktools-proxy do servidor de casa (/home/suze/stacks/docktools-proxy).
+# Segredos ficam fora do repo: grafana.env (senha, token do bot) e o
+# Caddyfile real (hash do basic_auth).
+services:
+  caddy:
+    image: caddy:2.11.4
+    container_name: docktools-caddy
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+      - "127.0.0.1:9180:9180"   # /metrics, so para o Alloy
+    networks:
+      - default
+      - edge
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv/docktools:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - grafana
+      - portainer
+
+  loki:
+    image: grafana/loki:2.9.17
+    container_name: docktools-loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yml
+    ports:
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/local-config.yml:ro
+      - loki_data:/loki
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    container_name: docktools-prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=30d
+      - --storage.tsdb.retention.size=8GB
+      - --web.enable-remote-write-receiver
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+
+  # Host network/pid/cgroup e privileged: precisa ver rede, disco, sensores,
+  # bateria e cgroups do host, e o journal. Equivale a root no host.
+  alloy:
+    image: grafana/alloy:v1.18.0
+    container_name: docktools-alloy
+    restart: unless-stopped
+    network_mode: host
+    pid: host
+    cgroup: host
+    privileged: true
+    command:
+      - run
+      - --server.http.listen-addr=127.0.0.1:12345
+      - --storage.path=/var/lib/alloy/data
+      - --disable-reporting
+      - /etc/alloy/config.alloy
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - alloy_data:/var/lib/alloy/data
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/containerd:/run/containerd:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/host/root:ro,rslave
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /dev/disk:/dev/disk:ro
+      - /var/log/journal:/var/log/journal:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    depends_on:
+      - loki
+      - prometheus
+
+  grafana:
+    image: grafana/grafana-oss:13.0.2
+    container_name: docktools-grafana
+    restart: unless-stopped
+    env_file:
+      - grafana.env
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana-provisioning:/etc/grafana/provisioning:ro
+      - ./grafana-dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - loki
+      - prometheus
+
+  portainer:
+    image: portainer/portainer-ce:2.39.3
+    container_name: portainer
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+volumes:
+  caddy_data:
+  caddy_config:
+  grafana_data:
+  loki_data:
+  alloy_data:
+  promtail_positions:
+  portainer_data:
+  prometheus_data:
+
+networks:
+  edge:
+    external: true

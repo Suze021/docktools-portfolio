@@ -1,0 +1,193 @@
+// Coleta do servidor de casa (suze@192.168.18.33).
+// Roda com network_mode/pid host: Loki e Prometheus sao alcancados em
+// 127.0.0.1 e as metricas de rede/processo sao as do host, nao do container.
+
+// ---------------------------------------------------------------- logs
+
+// Containers, com nome e projeto compose como rotulos.
+discovery.docker "containers" {
+	host = "unix:///var/run/docker.sock"
+}
+
+discovery.relabel "containers" {
+	targets = []
+
+	rule {
+		source_labels = ["__meta_docker_container_name"]
+		regex         = "/(.*)"
+		target_label  = "container"
+	}
+	rule {
+		source_labels = ["__meta_docker_container_label_com_docker_compose_project"]
+		target_label  = "compose_project"
+	}
+	rule {
+		source_labels = ["__meta_docker_container_label_com_docker_compose_service"]
+		target_label  = "compose_service"
+	}
+}
+
+loki.source.docker "containers" {
+	host          = "unix:///var/run/docker.sock"
+	targets       = discovery.docker.containers.targets
+	relabel_rules = discovery.relabel.containers.rules
+	labels        = {host = "casa", job = "docker"}
+	forward_to    = [loki.process.caddy_access.receiver]
+}
+
+// Log de acesso do Caddy: so o site vira rotulo (baixa cardinalidade); IP,
+// pais, caminho e status ficam no corpo e sao lidos com | json.
+loki.process "caddy_access" {
+	stage.match {
+		selector = "{container=\"docktools-caddy\"} |~ \"http.log.access\""
+
+		stage.json {
+			expressions = {site = "request.host"}
+		}
+		stage.labels {
+			values = {site = ""}
+		}
+		stage.static_labels {
+			values = {kind = "access"}
+		}
+	}
+	forward_to = [loki.write.default.receiver]
+}
+
+// journald do host: so as unidades que importam numa emergencia + kernel.
+loki.relabel "journal" {
+	forward_to = []
+
+	rule {
+		source_labels = ["__journal__systemd_unit"]
+		target_label  = "unit"
+	}
+	rule {
+		source_labels = ["__journal__transport"]
+		target_label  = "transport"
+	}
+	rule {
+		source_labels = ["__journal_priority_keyword"]
+		target_label  = "level"
+	}
+	rule {
+		source_labels = ["__journal_syslog_identifier"]
+		target_label  = "identifier"
+	}
+}
+
+loki.source.journal "host" {
+	path          = "/var/log/journal"
+	max_age       = "24h"
+	relabel_rules = loki.relabel.journal.rules
+	labels        = {host = "casa", job = "journal"}
+	forward_to    = [loki.process.journal_filter.receiver]
+}
+
+loki.process "journal_filter" {
+	stage.match {
+		selector            = "{job=\"journal\", unit!~\"cloudflared.service|actions.runner..*|ssh.service|docker.service|net-watchdog.service|nic-no-aspm.service\", transport!=\"kernel\"}"
+		action              = "drop"
+		drop_counter_reason = "unit_fora_do_filtro"
+	}
+	forward_to = [loki.write.default.receiver]
+}
+
+loki.write "default" {
+	endpoint {
+		url = "http://127.0.0.1:3100/loki/api/v1/push"
+	}
+}
+
+// ------------------------------------------------------------- metricas
+
+prometheus.exporter.unix "host" {
+	procfs_path = "/host/proc"
+	sysfs_path  = "/host/sys"
+	rootfs_path = "/host/root"
+	set_collectors = [
+		"cpu", "loadavg", "meminfo", "filesystem", "diskstats", "netdev",
+		"hwmon", "thermal_zone", "powersupplyclass", "uname", "time", "pressure",
+	]
+
+	filesystem {
+		mount_points_exclude = "^/(dev|proc|run|sys|var/lib/docker/.+|snap/.+)($|/)"
+		fs_types_exclude     = "^(tmpfs|overlay|squashfs|nsfs|autofs|proc|sysfs|cgroup2?|devpts|devtmpfs|fusectl|mqueue|tracefs|debugfs|securityfs|pstore|bpf|configfs|binfmt_misc|efivarfs|ramfs|hugetlbfs|rpc_pipefs)$"
+	}
+	netdev {
+		device_include = "^enp2s0$"
+	}
+}
+
+prometheus.exporter.cadvisor "containers" {
+	docker_host      = "unix:///var/run/docker.sock"
+	docker_only      = true
+	storage_duration = "5m"
+}
+
+// Sondas de fora pra dentro: passam pelo Cloudflare e pelo tunel, entao
+// "fora" aqui pega tunel, DNS e app. 401 nos paineis e o basic auth: no ar.
+prometheus.exporter.blackbox "sites" {
+	config = "{ modules: { http_2xx: { prober: http, timeout: 10s }, http_401: { prober: http, timeout: 10s, http: { valid_status_codes: [401] } } } }"
+
+	target {
+		name    = "docktools.dev"
+		address = "https://docktools.dev/healthz"
+		module  = "http_2xx"
+	}
+	target {
+		name    = "openclaw"
+		address = "https://openclaw.docktools.dev/"
+		module  = "http_2xx"
+	}
+	target {
+		name    = "logs"
+		address = "https://logs.docktools.dev/"
+		module  = "http_401"
+	}
+	target {
+		name    = "portainer"
+		address = "https://portainer.docktools.dev/"
+		module  = "http_401"
+	}
+}
+
+prometheus.scrape "host" {
+	targets         = prometheus.exporter.unix.host.targets
+	forward_to      = [prometheus.relabel.instance.receiver]
+	scrape_interval = "30s"
+}
+
+prometheus.scrape "containers" {
+	targets         = prometheus.exporter.cadvisor.containers.targets
+	forward_to      = [prometheus.relabel.instance.receiver]
+	scrape_interval = "30s"
+}
+
+prometheus.scrape "sites" {
+	targets         = prometheus.exporter.blackbox.sites.targets
+	forward_to      = [prometheus.relabel.instance.receiver]
+	scrape_interval = "60s"
+	scrape_timeout  = "15s"
+}
+
+prometheus.scrape "caddy" {
+	targets         = [{__address__ = "127.0.0.1:9180", job = "caddy"}]
+	forward_to      = [prometheus.relabel.instance.receiver]
+	scrape_interval = "30s"
+}
+
+prometheus.relabel "instance" {
+	forward_to = [prometheus.remote_write.default.receiver]
+
+	rule {
+		target_label = "host"
+		replacement  = "casa"
+	}
+}
+
+prometheus.remote_write "default" {
+	endpoint {
+		url = "http://127.0.0.1:9090/api/v1/write"
+	}
+}

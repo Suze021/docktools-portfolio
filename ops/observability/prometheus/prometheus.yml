@@ -1,0 +1,4 @@
+# Tudo chega por remote write do Alloy; o Prometheus so guarda.
+global:
+  evaluation_interval: 1m
+scrape_configs: []
