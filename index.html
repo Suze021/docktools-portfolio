@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://docktools.dev" />
     <title>Guilherme Rocha — Full-stack developer</title>
     <link rel="icon" type="image/svg+xml" href="/assets/docktools-mark.svg" />
-    <link rel="stylesheet" href="/styles.css?v=e67b0359b4" />
+    <link rel="stylesheet" href="/styles.css?v=8d88f029c4" />
     <script src="/app.js?v=5754da42ab" defer></script>
     <script type="application/ld+json">
       {
@@ -124,7 +124,7 @@
         <div class="project-list">
           <article class="project project-energy" data-project>
             <div class="project-sticky">
-              <span class="project-number">01 / 04</span>
+              <span class="project-number">01 / 06</span>
               <div class="project-preview" data-project-preview>
                 <div class="billing-board" aria-hidden="true">
                   <div class="board-header"><span>FATURAMENTO / JUL.26</span><i>OPERACIONAL</i></div>
@@ -154,7 +154,7 @@
 
           <article class="project project-map" data-project>
             <div class="project-sticky">
-              <span class="project-number">02 / 04</span>
+              <span class="project-number">02 / 06</span>
               <div class="project-preview" data-project-preview>
                 <div class="map-board" aria-hidden="true">
                   <svg viewBox="0 0 640 500" preserveAspectRatio="none">
@@ -185,7 +185,7 @@
 
           <article class="project project-kiosk" data-project>
             <div class="project-sticky">
-              <span class="project-number">03 / 04</span>
+              <span class="project-number">03 / 06</span>
               <div class="project-preview" data-project-preview>
                 <div class="kiosk-board" aria-hidden="true">
                   <div class="kiosk-shell">
@@ -214,7 +214,7 @@
 
           <article class="project project-tickets" data-project>
             <div class="project-sticky">
-              <span class="project-number">04 / 04</span>
+              <span class="project-number">04 / 06</span>
               <div class="project-preview" data-project-preview>
                 <div class="ticket-board" aria-hidden="true">
                   <div class="ticket-stub"><small>ADMIT ONE</small><strong>J7 / LIVE</strong><span>24 AGO — 22:00</span><i>INFINITY PAY</i></div>
@@ -237,11 +237,73 @@
               <ul class="project-stack"><li>Node.js</li><li>Infinity Pay</li><li>WhatsApp API</li><li>Linux</li></ul>
             </div>
           </article>
+
+          <article class="project project-offers" data-project>
+            <div class="project-sticky">
+              <span class="project-number">05 / 06</span>
+              <div class="project-preview" data-project-preview>
+                <div class="offer-board" aria-hidden="true">
+                  <div class="offer-queue">
+                    <div class="offer-row is-approved"><small>Mercado Livre</small><strong>R$ 189,90</strong><b>Publicar</b></div>
+                    <div class="offer-row is-rejected"><small>AliExpress</small><strong>R$ 12,00</strong><b>Preço suspeito</b></div>
+                    <div class="offer-row is-approved"><small>Amazon</small><strong>R$ 349,00</strong><b>Publicar</b></div>
+                    <div class="offer-row"><small>Shopee</small><strong>R$ 54,90</strong><b>Na fila</b></div>
+                  </div>
+                  <div class="offer-message"><small>Grupo de ofertas · agora</small><strong>Fone Bluetooth com cancelamento de ruído</strong><span><s>R$ 279,90</s> R$ 189,90</span><i>−32%</i></div>
+                  <div class="offer-health"><i></i><span>Circuit breaker fechado · 0 falhas</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-kind">Produto próprio · Automação &amp; IA</p>
+              <h3>Um robô que publica sozinho e sabe quando parar.</h3>
+              <p class="project-summary">
+                Curadoria autônoma de ofertas de quatro marketplaces, publicadas com link de afiliado num grupo de WhatsApp, 24 horas por dia e sem operador.
+              </p>
+              <dl class="project-details">
+                <div><dt>Arquitetura</dt><dd>Pipeline determinístico com o modelo de linguagem como curador sem ferramentas: o título de um produto não consegue fazer o robô agir.</dd></div>
+                <div><dt>Salvaguardas</dt><dd>Conferência de preço antes do envio, faixa de desconto plausível, limites de envio, circuit breaker e marcação prévia para não duplicar em queda.</dd></div>
+                <div><dt>Operação</dt><dd>Evolution API self-hosted, health check, smoke test e alerta externo no Telegram, porque o painel que cai junto com o servidor não avisa ninguém.</dd></div>
+              </dl>
+              <ul class="project-stack"><li>TypeScript</li><li>Node.js</li><li>LLM</li><li>Evolution API</li><li>Vitest</li></ul>
+            </div>
+          </article>
+
+          <article class="project project-dns" data-project>
+            <div class="project-sticky">
+              <span class="project-number">06 / 06</span>
+              <div class="project-preview" data-project-preview>
+                <div class="dns-board" aria-hidden="true">
+                  <div class="dns-header"><span>CACHE MISS / RECURSÃO</span><i>P95</i></div>
+                  <div class="dns-row"><span>Quad9 DoT</span><b style="--w:60%"></b><em>70,7 ms</em></div>
+                  <div class="dns-row"><span>Control D DoT</span><b style="--w:72%"></b><em>72,8 ms</em></div>
+                  <div class="dns-row"><span>OpenDNS DoH</span><b style="--w:79%"></b><em>74,0 ms</em></div>
+                  <div class="dns-row"><span>Cloudflare UDP</span><b style="--w:100%"></b><em>77,7 ms</em></div>
+                  <div class="dns-baseline"><small>Linha de base</small><strong>O DNS que você já usa</strong></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-content">
+              <p class="project-kind">Ferramenta própria · Redes &amp; desempenho</p>
+              <h3>Medir o que importa, não o eco do pacote.</h3>
+              <p class="project-summary">
+                Benchmark de resolvedores DNS que cronometra a resolução real de nomes a partir da sua rede, com o DNS atual como linha de base.
+              </p>
+              <dl class="project-details">
+                <div><dt>Método</dt><dd>Consultas completas em vez de ping ICMP, separando cache de recursão completa e medindo p50, p95, p99 e jitter.</dd></div>
+                <div><dt>Protocolos</dt><dd>UDP, DNS sobre TLS e DNS sobre HTTPS no mesmo catálogo, com sinalização de resolvedores que filtram respostas.</dd></div>
+                <div><dt>Entrega</dt><dd>Um único motor de medição servindo uma janela gráfica, com o ranking se reordenando ao vivo, e uma CLI para script e automação.</dd></div>
+              </dl>
+              <ul class="project-stack"><li>Go</li><li>Wails</li><li>DNS</li><li>DoT / DoH</li><li>CLI</li></ul>
+            </div>
+          </article>
         </div>
 
         <div class="secondary-work section-shell">
-          <article data-reveal><span>05</span><h3>Automação contínua</h3><p>Bots com Playwright, gestão de sessão, retry com backoff e logging estruturado para operação 24/7.</p><ul><li>Node.js</li><li>Playwright</li><li>Mensageria</li></ul></article>
-          <article data-reveal><span>06</span><h3>PWA offline</h3><p>Monitoramento de sistemas em rede fechada, com Service Workers e operação offline; projeto adquirido pela instituição de ensino.</p><ul><li>PWA</li><li>JavaScript</li><li>Service Workers</li></ul></article>
+          <article data-reveal><span>07</span><h3>Radar de licitações</h3><p>Varredura diária do PNCP com perfil por cliente: termos com peso, exclusões, corte por valor e filtro por UF feito no servidor. Sai um relatório completo e um resumo pronto para o WhatsApp.</p><ul><li>Node.js</li><li>PNCP</li><li>Zero dependências</li></ul></article>
+          <article data-reveal><span>08</span><h3>Infra observada</h3><p>Produção migrada de uma VPS para servidor próprio atrás de Cloudflare Tunnel, com métricas, logs, alertas e watchdog de rede. Nela também roda um servidor MCP que recupera PINs de assinatura digital do e-mail corporativo.</p><ul><li>Docker</li><li>Grafana</li><li>MCP</li></ul></article>
+          <article data-reveal><span>09</span><h3>Automação contínua</h3><p>Bots com Playwright, gestão de sessão, retry com backoff e logging estruturado para operação 24/7.</p><ul><li>Node.js</li><li>Playwright</li><li>Mensageria</li></ul></article>
+          <article data-reveal><span>10</span><h3>PWA offline</h3><p>Monitoramento de sistemas em rede fechada, com Service Workers e operação offline; projeto adquirido pela instituição de ensino.</p><ul><li>PWA</li><li>JavaScript</li><li>Service Workers</li></ul></article>
         </div>
       </section>
 
