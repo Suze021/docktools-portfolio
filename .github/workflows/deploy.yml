@@ -30,7 +30,9 @@ jobs:
           site="$STACK_DIR/site"
           mkdir -p "$site/assets"
           install -m 0644 ops/portfolio-compose.yaml "$STACK_DIR/compose.yaml"
-          install -m 0644 nginx.conf "$STACK_DIR/nginx.conf"
+          # Bind mount de arquivo único prende o inode: install troca o inode e o
+          # container segue lendo o antigo. Sobrescrever no lugar mantém o reload valendo.
+          cat nginx.conf > "$STACK_DIR/nginx.conf"
           install -m 0644 index.html styles.css app.js robots.txt sitemap.xml llms.txt "$site/"
           # Só o que ia para o ar no K3s; os banners do LinkedIn ficam fora.
           install -m 0644 assets/curriculo-guilherme-rocha.pdf assets/docktools-mark.svg assets/og.png "$site/assets/"
