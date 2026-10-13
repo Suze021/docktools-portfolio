@@ -1,0 +1,5 @@
+# Conteúdo aberto para buscadores e para assistentes de IA.
+User-agent: *
+Allow: /
+
+Sitemap: https://docktools.dev/sitemap.xml

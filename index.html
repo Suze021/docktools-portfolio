@@ -13,27 +13,90 @@
       property="og:description"
       content="Engenharia de produto, integrações financeiras, dados e infraestrutura — do problema à produção."
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://docktools.dev" />
-    <title>Guilherme Rocha — Full-stack developer</title>
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://docktools.dev/" />
+    <meta property="og:site_name" content="docktools.dev" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="https://docktools.dev/assets/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Guilherme de Oliveira Rocha — desenvolvedor full-stack" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guilherme Rocha — Full-stack developer" />
+    <meta name="twitter:description" content="Engenharia de produto, integrações financeiras, dados e infraestrutura — do problema à produção." />
+    <meta name="twitter:image" content="https://docktools.dev/assets/og.png" />
+    <title>Guilherme Rocha — Desenvolvedor full-stack: Node.js, pagamentos e SaaS</title>
+    <link rel="canonical" href="https://docktools.dev/" />
     <link rel="icon" type="image/svg+xml" href="/assets/docktools-mark.svg" />
-    <link rel="stylesheet" href="/styles.css?v=8d88f029c4" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Resumo para LLMs" />
+    <link rel="stylesheet" href="/styles.css?v=950476e0fd" />
     <script src="/app.js?v=5754da42ab" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Guilherme de Oliveira Rocha",
-        "jobTitle": "Desenvolvedor Full-Stack",
-        "url": "https://docktools.dev",
-        "email": "mailto:contatoguilhermeoliveira@protonmail.com",
-        "telephone": "+55 21 98826-9110",
-        "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressCountry": "BR" },
-        "sameAs": [
-          "https://github.com/Suze021",
-          "https://www.linkedin.com/in/guilherme-de-oliveira-rocha-04aa371a1"
-        ],
-        "knowsAbout": ["Node.js", "TypeScript", "React", "Next.js", "PostgreSQL", "Docker", "Payment integrations"]
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://docktools.dev/#website",
+            "url": "https://docktools.dev/",
+            "name": "docktools.dev",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://docktools.dev/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://docktools.dev/#profile",
+            "url": "https://docktools.dev/",
+            "name": "Guilherme Rocha — Desenvolvedor full-stack",
+            "inLanguage": "pt-BR",
+            "dateModified": "2026-10-12",
+            "isPartOf": { "@id": "https://docktools.dev/#website" },
+            "mainEntity": { "@id": "https://docktools.dev/#person" },
+            "hasPart": [
+              { "@type": "CreativeWork", "name": "Motor de faturamento para geração compartilhada de energia", "description": "SaaS multi-tenant que transforma dados de concessionárias e regras por cliente em cobranças auditáveis, com compensação de créditos, conciliação e integração com Asaas.", "keywords": "Node.js, PostgreSQL, APIs REST, Webhooks, Docker", "creator": { "@id": "https://docktools.dev/#person" } },
+              { "@type": "CreativeWork", "name": "Mapa colaborativo para viajantes de motorhome", "description": "Produto próprio com mapas, comunidade e assinaturas recorrentes via Asaas.", "keywords": "Next.js, TypeScript, Prisma, PostgreSQL, AWS", "creator": { "@id": "https://docktools.dev/#person" } },
+              { "@type": "CreativeWork", "name": "Totem de autoatendimento para rede de salões", "description": "Check-in, agenda Trinks e pagamento no terminal Stone orquestrados por uma camada Node.js.", "keywords": "Node.js, Stone, Trinks, engenharia reversa", "creator": { "@id": "https://docktools.dev/#person" } },
+              { "@type": "CreativeWork", "name": "Plataforma de ingressos com troca de gateway sem downtime", "description": "Venda de ingressos em produção, migrada para Infinity Pay, com notificações automáticas via WhatsApp.", "keywords": "Node.js, Infinity Pay, WhatsApp API, Linux", "creator": { "@id": "https://docktools.dev/#person" } },
+              { "@type": "CreativeWork", "name": "Robô de curadoria de ofertas com LLM", "description": "Curadoria autônoma de ofertas de quatro marketplaces publicadas em grupo de WhatsApp, com salvaguardas de preço e circuit breaker.", "keywords": "TypeScript, Node.js, LLM, Evolution API, Vitest", "creator": { "@id": "https://docktools.dev/#person" } },
+              { "@type": "SoftwareApplication", "name": "dnsbench", "applicationCategory": "UtilitiesApplication", "description": "Benchmark de resolvedores DNS que mede a resolução real de nomes (UDP, DoT, DoH) com p50, p95, p99 e jitter, em GUI e CLI.", "programmingLanguage": "Go", "creator": { "@id": "https://docktools.dev/#person" } }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://docktools.dev/#person",
+            "name": "Guilherme de Oliveira Rocha",
+            "alternateName": "Guilherme Rocha",
+            "jobTitle": "Desenvolvedor Full-Stack",
+            "description": "Desenvolvedor full-stack desde 2018, focado em Node.js, TypeScript e React, integrações de pagamento, SaaS multi-tenant e operação de sistemas em produção.",
+            "url": "https://docktools.dev/",
+            "image": "https://docktools.dev/assets/og.png",
+            "email": "mailto:contatoguilhermeoliveira@protonmail.com",
+            "telephone": "+55 21 98826-9110",
+            "address": { "@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressCountry": "BR" },
+            "sameAs": [
+              "https://github.com/Suze021",
+              "https://www.linkedin.com/in/guilherme-de-oliveira-rocha-04aa371a1"
+            ],
+            "knowsLanguage": ["pt-BR", "en"],
+            "hasCredential": {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "degree",
+              "name": "Análise e Desenvolvimento de Sistemas"
+            },
+            "knowsAbout": ["Node.js", "TypeScript", "React", "Next.js", "PostgreSQL", "Prisma", "Docker", "Linux", "Playwright", "Payment integrations", "Asaas", "Stone", "Infinity Pay", "Mercado Pago", "Multi-tenant SaaS", "Webhooks"]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://docktools.dev/#faq",
+            "mainEntity": [
+              { "@type": "Question", "name": "O que o Guilherme Rocha faz?", "acceptedAnswer": { "@type": "Answer", "text": "É desenvolvedor full-stack desde 2018 e assume o ciclo inteiro: regra de negócio, modelagem de dados, integrações, interface, deploy e sustentação em produção." } },
+              { "@type": "Question", "name": "Com quais tecnologias ele trabalha?", "acceptedAnswer": { "@type": "Answer", "text": "JavaScript, TypeScript, Node.js, React e Next.js no produto; PostgreSQL, MySQL e Prisma nos dados; Docker, Linux e CI/CD na operação; Playwright e webhooks em automação; Go em ferramentas próprias." } },
+              { "@type": "Question", "name": "Quais gateways de pagamento ele já integrou?", "acceptedAnswer": { "@type": "Answer", "text": "Quatro: Asaas, Stone, Infinity Pay e Mercado Pago — incluindo webhooks, conciliação e a migração completa de um gateway para Infinity Pay sem downtime." } },
+              { "@type": "Question", "name": "Que tipo de projeto ele já entregou?", "acceptedAnswer": { "@type": "Answer", "text": "SaaS multi-tenant de faturamento de energia, mapa colaborativo com assinaturas, totem de autoatendimento com pagamento físico, plataforma de ingressos, robô de ofertas com LLM, benchmark de DNS e radar de licitações do PNCP." } },
+              { "@type": "Question", "name": "Como entrar em contato com o Guilherme Rocha?", "acceptedAnswer": { "@type": "Answer", "text": "Pelo e-mail contatoguilhermeoliveira@protonmail.com ou pelo WhatsApp +55 21 98826-9110. Ele mora no Rio de Janeiro." } }
+            ]
+          }
+        ]
       }
     </script>
   </head>
@@ -342,6 +405,17 @@
           <div><span>Graduação</span><strong>Análise e Desenvolvimento de Sistemas</strong><em>Concluído em 2023</em></div>
           <div><span>Pós-graduação</span><strong>Gestão com ênfase em Governança de Dados</strong><em>Dados como decisão</em></div>
           <div><span>Idiomas</span><strong>Português nativo · Inglês conversacional</strong><em>Leitura técnica profissional</em></div>
+        </div>
+
+        <div class="faq" id="perguntas" data-reveal>
+          <h2>Perguntas frequentes</h2>
+          <div>
+            <article><h3>O que o Guilherme Rocha faz?</h3><p>É desenvolvedor full-stack desde 2018 e assume o ciclo inteiro: regra de negócio, modelagem de dados, integrações, interface, deploy e sustentação em produção.</p></article>
+            <article><h3>Com quais tecnologias ele trabalha?</h3><p>JavaScript, TypeScript, Node.js, React e Next.js no produto; PostgreSQL, MySQL e Prisma nos dados; Docker, Linux e CI/CD na operação; Playwright e webhooks em automação; Go em ferramentas próprias.</p></article>
+            <article><h3>Quais gateways de pagamento ele já integrou?</h3><p>Quatro: Asaas, Stone, Infinity Pay e Mercado Pago — incluindo webhooks, conciliação e a migração completa de um gateway para Infinity Pay sem downtime.</p></article>
+            <article><h3>Que tipo de projeto ele já entregou?</h3><p>SaaS multi-tenant de faturamento de energia, mapa colaborativo com assinaturas, totem de autoatendimento com pagamento físico, plataforma de ingressos, robô de ofertas com LLM, benchmark de DNS e radar de licitações do PNCP.</p></article>
+            <article><h3>Como entrar em contato com o Guilherme Rocha?</h3><p>Pelo e-mail contatoguilhermeoliveira@protonmail.com ou pelo WhatsApp +55 21 98826-9110. Ele mora no Rio de Janeiro.</p></article>
+          </div>
         </div>
       </section>
 

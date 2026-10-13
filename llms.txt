@@ -1,0 +1,34 @@
+# Guilherme de Oliveira Rocha — desenvolvedor full-stack
+
+> Desenvolvedor full-stack no Rio de Janeiro, atuando de ponta a ponta desde 2018: regra de negócio, modelagem de dados, integrações, interface, deploy e sustentação em produção. Foco em Node.js, TypeScript e React, integrações de pagamento (Asaas, Stone, Infinity Pay, Mercado Pago) e SaaS multi-tenant.
+
+- Site: https://docktools.dev/
+- Currículo (PDF): https://docktools.dev/assets/curriculo-guilherme-rocha.pdf
+- E-mail: contatoguilhermeoliveira@protonmail.com
+- WhatsApp: +55 21 98826-9110
+- GitHub: https://github.com/Suze021
+- LinkedIn: https://www.linkedin.com/in/guilherme-de-oliveira-rocha-04aa371a1
+
+## Trabalhos selecionados
+
+- Motor de faturamento para geração compartilhada de energia: SaaS multi-tenant que transforma dados heterogêneos de concessionárias e regras por cliente em cobranças corretas e auditáveis — cálculo configurável, compensação de créditos, conciliação e integração com Asaas. Node.js, PostgreSQL, webhooks, Docker.
+- Mapa colaborativo para viajantes de motorhome: produto próprio com mapas, contribuição da comunidade e assinaturas recorrentes via Asaas. Next.js, TypeScript, Prisma, PostgreSQL, AWS.
+- Totem de autoatendimento para rede de salões: check-in, agenda Trinks e pagamento no terminal Stone orquestrados por Node.js; engenharia reversa de endpoints para eliminar licenciamento recorrente.
+- Plataforma de ingressos: troca completa de gateway para Infinity Pay sem downtime, notificações automáticas via WhatsApp (Evolution API), operação em VPS Linux com systemd.
+- Robô de curadoria de ofertas: ofertas de quatro marketplaces publicadas 24h em grupo de WhatsApp; LLM como curador sem ferramentas, conferência de preço, circuit breaker e alerta externo no Telegram. TypeScript, Vitest.
+- dnsbench: benchmark de resolvedores DNS pela resolução real (UDP, DoT, DoH), com p50/p95/p99 e jitter, GUI (Wails) e CLI. Go.
+- Também: radar diário de licitações do PNCP por perfil de cliente; infraestrutura própria atrás de Cloudflare Tunnel com métricas, logs e alertas; automações Playwright 24/7; PWA offline adquirido por uma instituição de ensino.
+
+## Competências
+
+- Engenharia de produto: JavaScript, TypeScript, Node.js, React, Next.js
+- Integrações financeiras: webhooks, estados de transação, conciliação, migração de gateway
+- Dados: PostgreSQL, MySQL, Prisma, modelagem, migrações e correção segura em produção
+- Operação: Docker, Linux, AWS, systemd, CI/CD, observabilidade
+- Automação: Playwright, filas de eventos, retry com backoff, WhatsApp API
+
+## Formação
+
+- Graduação em Análise e Desenvolvimento de Sistemas (2023)
+- Pós-graduação em Gestão com ênfase em Governança de Dados
+- Português nativo, inglês conversacional
